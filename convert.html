@@ -7,7 +7,7 @@
 				arr = arr.replace("\r",'').split("\n");
 				var chr = '';
 				var map = '\nPROGMEM const char * const qdata_map[] = {\n';
-				var max = 0, maxl = 0;
+				var maxl = 0;
 				
 				arr.forEach(function(x, k){
 					var newstr = '';
@@ -35,12 +35,11 @@
 
 					chr += 'const prog_char qdata_'+k+'[] PROGMEM = "'+newstr+'";\n';
 					map += '\tqdata_'+k+',\n';
-					max = k;
 				});
 
 				map += '};\n';
-				more = 'unsigned int element_count = '+max+';\n';
-				more += 'char buffer['+maxl+'];\n'
+				more = 'unsigned int element_count = '+arr.length+';\n';
+				more += 'char buffer['+(maxl+1)+'];\n'
 
 				document.getElementById('p').innerHTML = '';
 				document.getElementById('p').appendChild(document.createTextNode(chr+map+more));
